@@ -99,7 +99,7 @@ public class Matrix {
     return new Matrix(result, this.rowsCount, otherMatrix.columnsCount);
   }
 
-  public Matrix createSubMatrix(int index) {
+  private Matrix createSubMatrix(int index) {
     int[][] matrixValues = new int[this.rowsCount - 1][this.columnsCount - 1];
     for (int rowNo = 1; rowNo < this.rowsCount; rowNo++) {
       for (int colNo = 0; colNo < this.columnsCount; colNo++) {
