@@ -112,4 +112,17 @@ public class MatrixTest {
       3
     );
   }
+
+  @Test
+  public void testMatrixDeterminantOfSizeTwo() {
+    int[][] array1 = { { 6, 3 }, { 6, 9 } };
+
+    Matrix matrix1 = new Matrix(array1, 2, 2);
+
+    assertEquals(
+      "Should calculate determinant of a matrix of size two",
+      matrix1.determinant(),
+      36
+    );
+  }
 }
