@@ -24,6 +24,17 @@ public class MatrixTest {
   }
 
   @Test
+  public void testMatrixEqualsForSameReference() {
+    int[][] array1 = { { 1, 2 }, { 3, 4 } };
+    Matrix matrix1 = new Matrix(array1, 2, 2);
+
+    assertTrue(
+      "Should give true if both matrices are of same reference",
+      matrix1.equals(matrix1)
+    );
+  }
+
+  @Test
   public void testMatrixEqualsForNonMatrixInstance() {
     int[][] array1 = { { 1, 2 }, { 3, 4 } };
     Matrix matrix1 = new Matrix(array1, 2, 2);
