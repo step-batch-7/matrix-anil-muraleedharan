@@ -146,7 +146,10 @@ public class MatrixTest {
     Matrix matrix1 = new Matrix(array1, 2, 3);
     Matrix matrix2 = new Matrix(array2, 2, 3);
 
-    assertTrue(matrix1.areSameDimensions(matrix2));
+    assertTrue(
+      "Should give true if both matrix have same dimension",
+      matrix1.areSameDimensions(matrix2)
+    );
   }
 
   @Test
@@ -157,6 +160,9 @@ public class MatrixTest {
     Matrix matrix1 = new Matrix(array1, 2, 3);
     Matrix matrix2 = new Matrix(array2, 3, 3);
 
-    assertFalse(matrix1.areSameDimensions(matrix2));
+    assertFalse(
+      "Should give false if both matrix have different dimension",
+      matrix1.areSameDimensions(matrix2)
+    );
   }
 }
