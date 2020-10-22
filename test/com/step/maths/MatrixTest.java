@@ -10,6 +10,20 @@ import org.junit.Test;
 public class MatrixTest {
 
   @Test
+  public void testMatrixToString() {
+    int[][] array1 = { { 1, 2 }, { 3, 4 } };
+    Matrix matrix1 = new Matrix(array1, 2, 2);
+
+    String expected = "Matrix [2][2]\n1 2 \n3 4 \n";
+
+    assertEquals(
+      "Should give string representation of a matrix",
+      expected,
+      matrix1.toString()
+    );
+  }
+
+  @Test
   public void testMatrixAdditionEqualDimension() {
     int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
     int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 } };
