@@ -61,6 +61,19 @@ public class MatrixTest {
   }
 
   @Test
+  public void testMatrixEqualsForSameDimensionDifferentContent() {
+    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
+    int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 } };
+    Matrix matrix1 = new Matrix(array1, 2, 3);
+    Matrix matrix2 = new Matrix(array2, 2, 3);
+
+    assertFalse(
+      "Should give false if both the matrices are of same dimensions and different content",
+      matrix1.equals(matrix2)
+    );
+  }
+
+  @Test
   public void testMatrixAdditionEqualDimension() {
     int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
     int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 } };
