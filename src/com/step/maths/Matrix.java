@@ -40,6 +40,9 @@ public class Matrix {
       return false;
     }
     Matrix otherMatrix = (Matrix) other;
+    if (!this.areSameDimensions(otherMatrix)) {
+      return false;
+    }
     for (int rowNo = 0; rowNo < rowsCount; rowNo++) {
       for (int colNo = 0; colNo < columnsCount; colNo++) {
         if (this.values[rowNo][colNo] != otherMatrix.values[rowNo][colNo]) {
