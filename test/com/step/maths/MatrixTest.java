@@ -1,6 +1,7 @@
 package com.step.maths;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -146,5 +147,16 @@ public class MatrixTest {
     Matrix matrix2 = new Matrix(array2, 2, 3);
 
     assertTrue(matrix1.areSameDimensions(matrix2));
+  }
+
+  @Test
+  public void testAreSameDimensionMethodForDifferentDimension() {
+    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
+    int[][] array2 = { { 0, 2, 1 }, { 3, 5, 7 }, { 4, 5, 6 } };
+
+    Matrix matrix1 = new Matrix(array1, 2, 3);
+    Matrix matrix2 = new Matrix(array2, 3, 3);
+
+    assertFalse(matrix1.areSameDimensions(matrix2));
   }
 }
