@@ -24,6 +24,19 @@ public class MatrixTest {
   }
 
   @Test
+  public void testMatrixEqualsForNonMatrixInstance() {
+    int[][] array1 = { { 1, 2 }, { 3, 4 } };
+    Matrix matrix1 = new Matrix(array1, 2, 2);
+
+    Object otherObject = new Object();
+
+    assertFalse(
+      "Should give false if the given Object is not an instance of Matrix",
+      matrix1.equals(otherObject)
+    );
+  }
+
+  @Test
   public void testMatrixAdditionEqualDimension() {
     int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
     int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 } };
