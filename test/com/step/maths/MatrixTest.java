@@ -5,177 +5,140 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class MatrixTest {
+  private Matrix testMatrix1;
+  private Matrix testMatrix2;
+  private Matrix testMatrix3;
+  private Matrix testMatrix4;
+  private Matrix testMatrix5;
+
+  @Before
+  public void initiateTestMatrices() {
+    int[][] array1 = { { 1, 2 }, { 3, 4 } };
+    int[][] array2 = { { 3, 4 }, { 1, 2 } };
+    int[][] array3 = { { 3, 4 }, { 1, 2 } };
+    int[][] array4 = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    int[][] array5 = { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+
+    this.testMatrix1 = new Matrix(array1, 2, 2);
+    this.testMatrix2 = new Matrix(array2, 2, 2);
+    this.testMatrix3 = new Matrix(array3, 2, 2);
+    this.testMatrix4 = new Matrix(array4, 3, 3);
+    this.testMatrix5 = new Matrix(array5, 3, 2);
+  }
 
   @Test
   public void testMatrixToString() {
-    int[][] array1 = { { 1, 2 }, { 3, 4 } };
-    Matrix matrix1 = new Matrix(array1, 2, 2);
-
     String expected = "Matrix [2][2]\n1 2 \n3 4 \n";
 
     assertEquals(
       "Should give string representation of a matrix",
       expected,
-      matrix1.toString()
+      this.testMatrix1.toString()
     );
   }
 
   @Test
   public void testMatrixEqualsForSameReference() {
-    int[][] array1 = { { 1, 2 }, { 3, 4 } };
-    Matrix matrix1 = new Matrix(array1, 2, 2);
-
     assertTrue(
       "Should give true if both matrices are of same reference",
-      matrix1.equals(matrix1)
+      this.testMatrix1.equals(this.testMatrix1)
     );
   }
 
   @Test
   public void testMatrixEqualsForNonMatrixInstance() {
-    int[][] array1 = { { 1, 2 }, { 3, 4 } };
-    Matrix matrix1 = new Matrix(array1, 2, 2);
-
     Object otherObject = new Object();
-
     assertFalse(
       "Should give false if the given Object is not an instance of Matrix",
-      matrix1.equals(otherObject)
+      this.testMatrix1.equals(otherObject)
     );
   }
 
   @Test
   public void testMatrixEqualsForDifferentDimensions() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 4, 5, 6, 7 }, { 1, 2, 3, 4 } };
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 2, 4);
-
     assertFalse(
       "Should give false if both the matrices are of different dimensions",
-      matrix1.equals(matrix2)
+      this.testMatrix1.equals(this.testMatrix4)
     );
   }
 
   @Test
   public void testMatrixEqualsForSameDimensionDifferentContent() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 } };
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 2, 3);
-
     assertFalse(
       "Should give false if both the matrices are of same dimensions and different content",
-      matrix1.equals(matrix2)
+      this.testMatrix1.equals(this.testMatrix2)
     );
   }
 
   @Test
   public void testMatrixEqualsForEqualMatrices() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 2, 3);
-
     assertTrue(
       "Should give true if both the matrices are of same dimension and content",
-      matrix1.equals(matrix2)
+      this.testMatrix2.equals(this.testMatrix3)
     );
   }
 
   @Test
   public void testMatrixAdditionEqualDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 } };
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 2, 3);
-
-    int[][] expectedValues = { { 5, 7, 9 }, { 5, 7, 9 } };
-    Matrix expectedMatrix = new Matrix(expectedValues, 2, 3);
+    int[][] expectedValues = { { 4, 6 }, { 4, 6 } };
+    Matrix expectedMatrix = new Matrix(expectedValues, 2, 2);
 
     assertEquals(
       "Should add two matrices if the dimensions are same",
       expectedMatrix,
-      matrix1.add(matrix2)
+      this.testMatrix1.add(this.testMatrix2)
     );
   }
 
   @Test
   public void testMatrixAdditionUnequalDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 }, { 1, 2, 3 } };
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 3, 3);
-
     assertNull(
       "Should not add two matrices if the dimensions are different",
-      matrix1.add(matrix2)
+      this.testMatrix1.add(this.testMatrix4)
     );
   }
 
   @Test
   public void testMatrixSubtractionSameDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 0, 2, 4 }, { 1, 3, 9 } };
-
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 2, 3);
-
-    int[][] expectedValues = { { 1, 0, -1 }, { 3, 2, -3 } };
-    Matrix expectedMatrix = new Matrix(expectedValues, 2, 3);
+    int[][] expectedValues = { { -2, -2 }, { 2, 2 } };
+    Matrix expectedMatrix = new Matrix(expectedValues, 2, 2);
 
     assertEquals(
       "Should subtract two matrices if the dimensions are same",
       expectedMatrix,
-      matrix1.subtract(matrix2)
+      this.testMatrix1.subtract(this.testMatrix2)
     );
   }
 
   @Test
   public void testMatrixSubtractionDifferentDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 4, 5, 6 }, { 1, 2, 3 }, { 1, 2, 3 } };
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 3, 3);
-
     assertNull(
       "Should not subtract two matrices if the dimensions are different",
-      matrix1.subtract(matrix2)
+      this.testMatrix1.subtract(this.testMatrix4)
     );
   }
 
   @Test
   public void testMatrixMultiplicationProperDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 0, 2 }, { 1, 3 }, { 5, 7 } };
-
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 3, 2);
-
-    int[][] expectedValues = { { 17, 29 }, { 35, 65 } };
+    int[][] expectedValues = { { 15, 22 }, { 7, 10 } };
     Matrix expectedMatrix = new Matrix(expectedValues, 2, 2);
 
     assertEquals(
       "Should multiply two matrices if the dimensions are proper",
       expectedMatrix,
-      matrix1.multiply(matrix2)
+      this.testMatrix3.multiply(this.testMatrix5)
     );
   }
 
   @Test
   public void testMatrixMultiplicationImproperDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 0, 2, 1 }, { 3, 5, 7 } };
-
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 2, 3);
-
     assertNull(
       "Should not multiply two matrices if the dimensions are not proper",
-      matrix1.multiply(matrix2)
+      this.testMatrix4.multiply(this.testMatrix5)
     );
   }
 
@@ -186,60 +149,42 @@ public class MatrixTest {
 
     assertEquals(
       "Should calculate determinant of a single element matrix",
-      matrix1.determinant(),
-      3
+      3,
+      matrix1.determinant()
     );
   }
 
   @Test
   public void testMatrixDeterminantOfSizeTwo() {
-    int[][] array1 = { { 6, 3 }, { 6, 9 } };
-    Matrix matrix1 = new Matrix(array1, 2, 2);
-
     assertEquals(
       "Should calculate determinant of a matrix of size two",
-      matrix1.determinant(),
-      36
+      -2,
+      this.testMatrix1.determinant()
     );
   }
 
   @Test
   public void testMatrixDeterminantOfSizeMoreThanTwo() {
-    int[][] array1 = { { 6, 3, 0 }, { 1, 6, 9 }, { 1, 4, 7 } };
-    Matrix matrix1 = new Matrix(array1, 3, 3);
-
     assertEquals(
       "Should calculate determinant of a matrix of size more than two",
-      matrix1.determinant(),
-      42
+      0,
+      this.testMatrix4.determinant()
     );
   }
 
   @Test
   public void testAreSameDimensionMethodForSameDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 0, 2, 1 }, { 3, 5, 7 } };
-
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 2, 3);
-
     assertTrue(
       "Should give true if both matrix have same dimension",
-      matrix1.areSameDimensions(matrix2)
+      this.testMatrix1.areSameDimensions(this.testMatrix2)
     );
   }
 
   @Test
   public void testAreSameDimensionMethodForDifferentDimension() {
-    int[][] array1 = { { 1, 2, 3 }, { 4, 5, 6 } };
-    int[][] array2 = { { 0, 2, 1 }, { 3, 5, 7 }, { 4, 5, 6 } };
-
-    Matrix matrix1 = new Matrix(array1, 2, 3);
-    Matrix matrix2 = new Matrix(array2, 3, 3);
-
     assertFalse(
       "Should give false if both matrix have different dimension",
-      matrix1.areSameDimensions(matrix2)
+      this.testMatrix1.areSameDimensions(this.testMatrix4)
     );
   }
 }
