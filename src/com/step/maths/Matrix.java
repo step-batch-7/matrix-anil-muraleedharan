@@ -96,14 +96,14 @@ public class Matrix {
     return new Matrix(result, this.rowsCount, otherMatrix.columnsCount);
   }
 
-  public Matrix createSubMatrix(int rowIndex) {
+  public Matrix createSubMatrix(int index) {
     int[][] matrixValues = new int[this.rowsCount - 1][this.columnsCount - 1];
     for (int rowNo = 1; rowNo < this.rowsCount; rowNo++) {
       for (int colNo = 0; colNo < this.columnsCount; colNo++) {
-        if (colNo < rowIndex) {
+        if (colNo < index) {
           matrixValues[rowNo - 1][colNo] = this.values[rowNo][colNo];
         }
-        if (colNo > rowIndex) {
+        if (colNo > index) {
           matrixValues[rowNo - 1][colNo - 1] = this.values[rowNo][colNo];
         }
       }
