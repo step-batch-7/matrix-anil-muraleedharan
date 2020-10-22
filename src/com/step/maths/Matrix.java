@@ -50,7 +50,7 @@ public class Matrix {
     return true;
   }
 
-  public boolean areDimensionsSame(Matrix other) {
+  public boolean areSameDimensions(Matrix other) {
     return (
       this.rowsCount == other.rowsCount &&
       this.columnsCount == other.columnsCount
@@ -58,7 +58,7 @@ public class Matrix {
   }
 
   public Matrix add(Matrix otherMatrix) {
-    if (!areDimensionsSame(otherMatrix)) return null;
+    if (!areSameDimensions(otherMatrix)) return null;
     int[][] result = new int[this.rowsCount][this.columnsCount];
     for (int rowNo = 0; rowNo < this.rowsCount; rowNo++) {
       for (int columnNo = 0; columnNo < this.columnsCount; columnNo++) {
@@ -70,7 +70,7 @@ public class Matrix {
   }
 
   public Matrix subtract(Matrix otherMatrix) {
-    if (!areDimensionsSame(otherMatrix)) return null;
+    if (!areSameDimensions(otherMatrix)) return null;
     int[][] result = new int[this.rowsCount][this.columnsCount];
     for (int rowNo = 0; rowNo < this.rowsCount; rowNo++) {
       result[rowNo] = new int[columnsCount];
