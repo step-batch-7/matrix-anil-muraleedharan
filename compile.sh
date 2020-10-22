@@ -1,3 +1,5 @@
+set -eu;
+
 echo "Cleaning up...\n";
 rm -rf out/*;
 

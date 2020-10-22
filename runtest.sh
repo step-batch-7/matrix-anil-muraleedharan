@@ -1,3 +1,5 @@
+set -eu;
+
 sh compile.sh;
 
 echo "Running test...\n\n\n";
