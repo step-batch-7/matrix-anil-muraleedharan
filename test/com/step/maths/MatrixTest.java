@@ -99,4 +99,17 @@ public class MatrixTest {
       matrix1.multiply(matrix2)
     );
   }
+
+  @Test
+  public void testMatrixDeterminantSingleElement() {
+    int[][] array1 = { { 3 } };
+
+    Matrix matrix1 = new Matrix(array1, 1, 1);
+
+    assertEquals(
+      "Should calculate determinant of a single element matrix",
+      matrix1.determinant(),
+      3
+    );
+  }
 }
