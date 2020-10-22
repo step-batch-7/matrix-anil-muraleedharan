@@ -103,7 +103,6 @@ public class MatrixTest {
   @Test
   public void testMatrixDeterminantSingleElement() {
     int[][] array1 = { { 3 } };
-
     Matrix matrix1 = new Matrix(array1, 1, 1);
 
     assertEquals(
@@ -116,13 +115,24 @@ public class MatrixTest {
   @Test
   public void testMatrixDeterminantOfSizeTwo() {
     int[][] array1 = { { 6, 3 }, { 6, 9 } };
-
     Matrix matrix1 = new Matrix(array1, 2, 2);
 
     assertEquals(
       "Should calculate determinant of a matrix of size two",
       matrix1.determinant(),
       36
+    );
+  }
+
+  @Test
+  public void testMatrixDeterminantOfSizeMoreThanTwo() {
+    int[][] array1 = { { 6, 3, 0 }, { 1, 6, 9 }, { 1, 4, 7 } };
+    Matrix matrix1 = new Matrix(array1, 3, 3);
+
+    assertEquals(
+      "Should calculate determinant of a matrix of size more than two",
+      matrix1.determinant(),
+      42
     );
   }
 }
