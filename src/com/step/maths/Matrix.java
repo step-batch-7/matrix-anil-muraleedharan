@@ -76,7 +76,6 @@ public class Matrix {
     if (!areSameDimensions(otherMatrix)) return null;
     int[][] result = new int[this.rowsCount][this.columnsCount];
     for (int rowNo = 0; rowNo < this.rowsCount; rowNo++) {
-      result[rowNo] = new int[columnsCount];
       for (int columnNo = 0; columnNo < this.columnsCount; columnNo++) {
         result[rowNo][columnNo] =
           this.values[rowNo][columnNo] - otherMatrix.values[rowNo][columnNo];
